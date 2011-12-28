@@ -302,6 +302,8 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         'endswith': 'LIKE BINARY %s',
         'istartswith': 'LIKE %s',
         'iendswith': 'LIKE %s',
+        'like': 'LIKE BINARY %s',
+        'ilike': 'LIKE %s',
     }
 
     def __init__(self, *args, **kwargs):

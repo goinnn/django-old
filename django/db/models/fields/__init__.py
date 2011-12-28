@@ -303,7 +303,7 @@ class Field(object):
         if lookup_type in (
                 'regex', 'iregex', 'month', 'day', 'week_day', 'search',
                 'contains', 'icontains', 'iexact', 'startswith', 'istartswith',
-                'endswith', 'iendswith', 'isnull'
+                'endswith', 'iendswith', 'isnull', 'ilike', 'like',
             ):
             return value
         elif lookup_type in ('exact', 'gt', 'gte', 'lt', 'lte'):
@@ -340,7 +340,7 @@ class Field(object):
             return QueryWrapper(('(%s)' % sql), params)
 
         if lookup_type in ('regex', 'iregex', 'month', 'day', 'week_day',
-                           'search'):
+                           'search', 'like', 'ilike'):
             return [value]
         elif lookup_type in ('exact', 'gt', 'gte', 'lt', 'lte'):
             return [self.get_db_prep_value(value, connection=connection,

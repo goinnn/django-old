@@ -101,6 +101,8 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         'endswith': 'LIKE %s',
         'istartswith': 'LIKE UPPER(%s)',
         'iendswith': 'LIKE UPPER(%s)',
+        'like': 'LIKE %s',
+        'ilike': 'LIKE UPPER(%s)',
     }
 
     def __init__(self, *args, **kwargs):

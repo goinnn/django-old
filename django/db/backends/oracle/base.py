@@ -218,7 +218,8 @@ WHEN (new.%(col_name)s IS NULL)
         return cursor.fetchone()[0]
 
     def lookup_cast(self, lookup_type):
-        if lookup_type in ('iexact', 'icontains', 'istartswith', 'iendswith'):
+        if lookup_type in ('iexact', 'icontains',
+                           'istartswith', 'iendswith', 'ilike'):
             return "UPPER(%s)"
         return "%s"
 
@@ -419,6 +420,8 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         'endswith': "LIKE TRANSLATE(%s USING NCHAR_CS) ESCAPE TRANSLATE('\\' USING NCHAR_CS)",
         'istartswith': "LIKE UPPER(TRANSLATE(%s USING NCHAR_CS)) ESCAPE TRANSLATE('\\' USING NCHAR_CS)",
         'iendswith': "LIKE UPPER(TRANSLATE(%s USING NCHAR_CS)) ESCAPE TRANSLATE('\\' USING NCHAR_CS)",
+        'like': "LIKE TRANSLATE(%s USING NCHAR_CS) ESCAPE TRANSLATE('\\' USING NCHAR_CS)",
+        'ilike': "LIKE UPPER(TRANSLATE(%s USING NCHAR_CS)) ESCAPE TRANSLATE('\\' USING NCHAR_CS)",
     }
 
     _likec_operators = _standard_operators.copy()
